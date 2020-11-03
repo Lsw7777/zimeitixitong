@@ -1,5 +1,6 @@
 <template>
   <div class="article-container">
+    <!-- 卡片 -->
     <el-card class="filter-card">
       <div slot="header" class="clearfix">
         <!-- 面包屑路径导航 -->
@@ -11,7 +12,7 @@
         <!-- /面包屑路径导航 -->
       </div>
       <!-- 数据筛选表单 -->
-      <el-form ref="form" :model="form" label-width="40px" size="mini">
+      <el-form ref="form" :model="form" label-width="40px" size="medium">
         <!-- size设置表单尺寸 -->
         <el-form-item label="状态">
           <el-radio-group v-model="status">
@@ -52,21 +53,22 @@
       <div slot="header" class="clearfix">
         根据筛选条件共查询到 {{ totalCount }} 条结果：
       </div>
-      <!-- 数据列表 -->
-      <!--
-        Table 表格组件
-        1、把需要展示的数组列表数据绑定给 table 组件的 data 属性
-          注意：你不用去 v-for 遍历，它自己会遍历
-        2、设计表格列 el-table-column
-          width 可以设定表格列的宽度
-          label 可以设定列的标题
-          prop  用来设定要渲染的列表项数据字段，只能展示文本
 
-        3、表格列默认只能渲染普通文本，如果需要展示其它内容，例如放个按钮啊、放个图片啊，那就需要自定义表格列模板了：https://element.eleme.cn/#/zh-CN/component/table#zi-ding-yi-lie-mo-ban
-       -->
-      <el-table :data="articles" stripe style="width: 100%" class="list-table" size="mini" v-loading="loading">
+
+      <!-- Table 表格组件 -->
+      <!-- 1、把需要展示的数组列表数据绑定给 table 组件的 data 属性 -->
+      <!-- 注意：你不用去 v-for 遍历，它自己会遍历 -->
+      <!-- 2、表格列 el-table-column 几个就几列-->
+      <!-- width 可以设定表格列的宽度 -->
+      <!-- label 可以设定列的标题 -->
+      <!-- prop  用来设定要渲染的列表项数据字段，只能展示文本 -->
+      <!-- 3、表格列默认只能渲染普通文本，如果需要展示其它内容，例如放个按钮啊、放个图片啊，那就需要自定义表格列模板了：https://element.eleme.cn/#/zh-CN/component/table#zi-ding-yi-lie-mo-ban -->
+
+
+      <el-table :data="articles" stripe style="width: 100%" class="list-table" size="medium" v-loading="loading">
         <!-- size设置尺寸 -->
         <el-table-column prop="date" label="封面">
+          <!-- 自定义表格列模板，就是把内容放进template中即可渲染 -->
           <template slot-scope="scope">
             <el-image style="width: 50px; height: 50px" :src="scope.row.cover.images[0]" fit="cover" lazy>
               <div slot="placeholder" class="image-slot">
@@ -126,6 +128,10 @@
        -->
       <el-pagination layout="prev, pager, next" background :total="totalCount" :page-size="pageSize" :disabled="loading"
         :current-page.sync="page" @current-change="onCurrentChange" />
+      <!-- @current-change="onCurrentChange"绑定事件来实现页码和内容的实际互动效果 -->
+
+
+
       <!-- /列表分页 -->
     </el-card>
   </div>
@@ -137,6 +143,7 @@
     getArticleChannels,
     deleteArticle
   } from '@/api/article'
+  // 如果调用的封装请求在同个组件，直接写在一起用，分割
 
 
   export default {
@@ -154,44 +161,14 @@
           type: [],
           resource: '',
           desc: ''
-        },
-        articles: [], // 文章数据列表
-        articleStatus: [{
-            status: 0,
-            text: '草稿',
-            type: 'info'
-          }, // 0
-          {
-            status: 1,
-            text: '待审核',
-            type: ''
-          }, // 1
-          {
-            status: 2,
-            text: '审核通过',
-            type: 'success'
-          }, // 2
-          {
-            status: 3,
-            text: '审核失败',
-            type: 'warning'
-          }, // 3
-          {
-            status: 4,
-            text: '已删除',
-            type: 'danger'
-          } // 4
-        ],
-        totalCount: 0, // 总数据条数
-        pageSize: 10, // 每页大小
-        status: null, // 查询文章的状态，不传就是全部
-        channels: [], // 文章频道列表
-        channelId: null, // 查询文章的频道
-        rangeDate: null, // 筛选的范围日期
-        loading: true, // 表单数据加载中 loading
-        page: 1 // 当前页码
+        }
       }
     },
+
+
+    articles: [], // 文章数据列表
+
+
     computed: {},
     watch: {},
     created() {
@@ -229,44 +206,19 @@
 
       onCurrentChange(page) {
         this.loadArticles(page)
+        // 只要点击页码几就能拿到一个实际的页码数字，把这个实际的页码数传入上面的loadArticles（）中
       },
 
-      loadChannels() {
-        getArticleChannels().then(res => {
-          this.channels = res.data.data.channels
-        })
-      },
 
-      onDeleteArticle(articleId) {
-        console.log(articleId)
-        console.log(articleId.toString())
-        this.$confirm('确认删除吗？', '删除提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          // 确认执行这里
-          deleteArticle(articleId.toString()).then(res => {
-            // 删除成功，更新当前页的文章数据列表
-            this.loadArticles(this.page)
-          })
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
-        // 找到数据接口
-        // 封装请求方法
-        // 删除请求调用
-        // 处理响应结果
-        // console.log('onDeleteArticle')
-      }
     }
   }
 </script>
 
 <style scoped lang="less">
+  .filter-card {
+    width: 100%;
+  }
+
   .filter-card {
     margin-bottom: 30px;
   }

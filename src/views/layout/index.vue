@@ -58,15 +58,17 @@
     created() {
       this.loadUserProfile()
       // 加载用户配置文件
-      // 组件初始化好，请求获取用户资料，此类初始化请求方法写在created中
-      // 注册自定义事件
-      // 当这个事件发布以后，这个注册函数就会被调用到
-      globalBus.$on('update-user', (data) => {
-        // this.user = data // 注意：不要这么做，对象之间赋值的是引用，会导致相互影响的问题
-        this.user.name = data.name
-        this.user.photo = data.photo
-      })
+      //  一般来说加载一个需要获取服务器响应的数据（如登录后显示的个人信息，页面中一打开就有的动态信息，如小说主页推荐的内容，广告热点等）
+      // 步骤：1.先找到服务器接口以及发起请求的接口参数等要求
+      // 2.使用封装好的方法发起服务器请求，这是一个方法
+      // 3.在created中调用这个请求方法
+      // 3把请求来的数据绑定在想要呈现在的目标位置中
+
+      // this.user = data // 注意：不要这么做，对象之间赋值的是引用，会导致相互影响的问题
+      this.user.name = data.name
+      this.user.photo = data.photo
     },
+
     mounted() {},
     methods: {
       // 除了登录接口，其它所有接口都需要授权才能请求使用

@@ -48,6 +48,8 @@
     name: 'LoginIndex',
     components: {},
     props: {},
+    // props是子组件访问父组件数据的唯一接口，当作为子组件需要用父组件内部数据的时候，
+    // 写上自定义的名字如  hello，  再在需要使用的标签内:hello='message',即调用父组件的message
     data() {
       return {
         user: {
@@ -108,6 +110,7 @@
     created() {},
     // 写在created中的是页面初始化加载时就要加载的内容，在这里调用加载，在下面methods定义具体方法内容
     // 登录请求并不是页面开始就要执行的操作，不写在这里，不调用，写在上面结构中的按钮内，点击后才调用
+
     mounted() {},
     methods: {
       onLogin() {

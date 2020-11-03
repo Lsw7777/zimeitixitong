@@ -25,7 +25,7 @@ export const getArticleChannels = () => {
     url: '/mp/v1_0/channels'
   })
 }
-
+// 如果接口没有参数可以不写
 
 //  删除文章
 
