@@ -111,7 +111,7 @@
           <template slot-scope="scope">
             <el-button size="mini" circle icon="el-icon-edit" type="primary"
               @click="$router.push('/publish?id=' + scope.row.id.toString())"></el-button>
-            <el-button size="mini" type="danger" icon="el-icon-delete" circle @click="onDeleteArticle(scope.row.id)">
+            <el-button size="mini" type="danger" icon="el-icon-delete" circle>
             </el-button>
           </template>
         </el-table-column>

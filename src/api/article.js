@@ -60,6 +60,7 @@ export const updateArticle = (articleId, data, draft = false) => {
     url: `/mp/v1_0/articles/${articleId}`,
     params: {
       draft // 是否存为草稿（true 为草稿）
+      // draft = false意思是设定了一个默认值，如果请求给的参数中没有draft，则用默认值，有多个参数要把有默认值得放在最后面
     },
     data
   })

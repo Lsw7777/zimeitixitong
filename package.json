@@ -9,7 +9,11 @@
   "dependencies": {
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "cropperjs": "^1.5.9",
+    "echarts": "^4.9.0",
+    "element-tiptap": "^1.26.2",
     "element-ui": "^2.14.0",
+    "json-bigint": "^1.0.0",
     "less": "^3.12.2",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"

@@ -1,5 +1,12 @@
 <template>
-  <div class="home-container">首页</div>
+  <div class="home-container">
+
+
+  </div>
+  <!-- 为什么需要分页？第一页，第二页... -->
+  <!-- 分页是为了缓解查询数据和渲染的压力，提高页面的响应速度，让用户更快看到页面 -->
+  <!-- 因为网络上页面的数据大多是动态的，如文章，商品，评论等，数量也很庞大，如果一次性全加载，速度很慢 -->
+  <!-- ctrl+f查找，alt+鼠标选择 多选统一操作 -->
 </template>
 
 <script>
@@ -23,4 +30,10 @@
   }
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+  .home-container {
+    width: 100%;
+    height: 100%;
+    background: url('./login_bg1.jpg') no-repeat;
+  }
+</style>

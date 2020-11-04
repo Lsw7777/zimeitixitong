@@ -13,8 +13,8 @@ export const login = (data) => {
     url: '/mp/v1_0/authorizations',
     // data 用来设置 POST 请求体，这个data自定义的，作为一个参数来接收数据或传输数据
     // 传入或接收的数据是什么它就是什么但一般为了有语义设置如下
-    // Body 参数使用 data 设置
-    // Query 参数使用 params 设置
+    // Body 参数使用 data 设置 一般get用body参数
+    // Query 参数使用 params 设置 一般post用query参数
     // Headers 参数使用 headers 设置
     // 封装成函数login(),调用时在括号内加上参数作为请求数据即可使用
     data

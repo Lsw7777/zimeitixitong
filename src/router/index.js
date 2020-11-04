@@ -6,7 +6,12 @@ import Login from '@/views/login'
 import Home from '@/views/home/'
 import Layout from '@/views/layout/'
 import Article from '@/views/article/'
-// 每一个新的组件都分三步，第一取好name，第二引入路由组件，第三写进routes中写好path和component
+import Publish from '@/views/publish/'
+import Image from '@/views/image/'
+import Comment from '@/views/comment/'
+import Settings from '@/views/settings/'
+import Fans from '@/views/fans/'
+// 关键！每一个新的组件都分三步，第一创建组件取好name，第二在头部引入路由组件，第三写进routes中写好path和component
 
 Vue.use(VueRouter)
 
@@ -25,19 +30,42 @@ const routes = [{
     // name: 'layout',
     component: Layout,
     children: [{
-      // 我们通常会把根路径 / 设置为网站的首页，网站首页其实都有/只是省略了，如www.baidu.com
-      // 为啥呢？因为我们在手动输入网址访问网站的时候，可以省略 /
-      path: '', // path 为空，会作为默认子路由渲染，即进入页面默认为该子路由
+        // 我们通常会把根路径 / 设置为网站的首页，网站首页其实都有/只是省略了，如www.baidu.com
+        // 为啥呢？因为我们在手动输入网址访问网站的时候，可以省略 /
+        path: '', // path 为空，会作为默认子路由渲染，即进入页面默认为该子路由
 
-      // 路由的名字是干啥的？
-      // 参考：https://gitee.com/lipengzhou/toutiao-publish-admin/issues/I1F1BA
-      name: 'home',
-      component: Home
-    }, {
-      path: '/article',
-      name: 'article',
-      component: Article
-    }, ]
+        // 路由的名字是干啥的？
+        // 参考：https://gitee.com/lipengzhou/toutiao-publish-admin/issues/I1F1BA
+        name: 'home',
+        component: Home
+      }, {
+        path: '/article',
+        name: 'article',
+        component: Article
+      }, {
+        path: '/publish',
+        name: 'publish',
+        component: Publish
+      },
+      {
+        path: '/image',
+        name: 'image',
+        component: Image
+      }, {
+        path: '/comment',
+        name: 'comment',
+        component: Comment
+      }, {
+        path: '/settings',
+        name: 'settings',
+        component: Settings
+      },
+      {
+        path: '/fans',
+        name: 'fans',
+        component: Fans
+      }
+    ]
   }
 ]
 

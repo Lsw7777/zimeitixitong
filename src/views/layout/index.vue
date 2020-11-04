@@ -51,6 +51,7 @@
       return {
         user: {},
         // 当前用户的登录信息，绑定上面的用户名和头像
+        // 向服务器发起请求来获取，再绑定到这
       }
     },
     computed: {},
@@ -78,6 +79,7 @@
         getUserProfile().then(res => {
           this.user = res.data.data
           // res是自定义的，接收到的服务器数据，这里作为参数，res.data.XXX 具体的某个数据
+          // 把获取到的服务器数据赋值给组件内部的数据user
 
         })
       },
